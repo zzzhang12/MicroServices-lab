@@ -105,24 +105,29 @@ def get_books():
     title_query = request.args.get('title', default=None, type=str)
 
     filtered_books = books
+    query_exists = False
 
     if genre_query:
+        query_exists = True
         filtered_books = [book for book in books if genre_query.lower() in book['genre'].lower()]
     
     if author_query:
+        query_exists = True
         filtered_books = [book for book in books if author_query.lower() in book['author'].lower()]
     
     if year_query:
+        query_exists = True
         filtered_books = [book for book in books if year_query.lower() in book['publication_year'].lower()]
     
     if title_query:
+        query_exists = True
         filtered_books = [book for book in books if title_query.lower() in book['title'].lower()]
 
-    if not filtered_books:
+    if query_exists and not filtered_books:
         # If no books match the query
         return jsonify({
             'message': 'Sorry, the books you searched for are not currently in our database. Here are some other books we have:',
-            'other_books': books  # You can modify this to return a specific set of other books if needed
+            'books': books  # You can modify this to return a specific set of other books if needed
         })
     
     return jsonify(books)
