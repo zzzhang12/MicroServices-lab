@@ -109,19 +109,19 @@ def get_books():
 
     if genre_query:
         query_exists = True
-        filtered_books = [book for book in books if genre_query.lower() in book['genre'].lower()]
+        filtered_books = [book for book in filtered_books if genre_query.lower() in book['genre'].lower()]
     
     if author_query:
         query_exists = True
-        filtered_books = [book for book in books if author_query.lower() in book['author'].lower()]
+        filtered_books = [book for book in filtered_books if author_query.lower() in book['author'].lower()]
     
     if year_query:
         query_exists = True
-        filtered_books = [book for book in books if year_query.lower() in book['publication_year'].lower()]
+        filtered_books = [book for book in filtered_books if year_query.lower() in book['publication_year'].lower()]
     
     if title_query:
         query_exists = True
-        filtered_books = [book for book in books if title_query.lower() in book['title'].lower()]
+        filtered_books = [book for book in filtered_books if title_query.lower() in book['title'].lower()]
 
     if query_exists and not filtered_books:
         # If no books match the query
