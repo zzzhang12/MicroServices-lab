@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -43,6 +43,10 @@ books = [
 
 @app.route('/books', methods=['GET'])
 def get_books():
+    genre_query = request.args.get('genre', default=None, type=str)
+    if genre_query:
+        filtered_books = [book for book in books if genre_query.lower() in book['genre'].lower()]
+        return jsonify(filtered_books)
     return jsonify(books)
 
 if __name__ == '__main__':
