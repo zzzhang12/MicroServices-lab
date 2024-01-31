@@ -118,6 +118,12 @@ def get_books():
     if title_query:
         filtered_books = [book for book in books if title_query.lower() in book['title'].lower()]
 
+    if not filtered_books:
+        # If no books match the query
+        return jsonify({
+            'message': 'Sorry, the books you searched for are not currently in our database. Here are some other books we have:',
+            'other_books': books  # You can modify this to return a specific set of other books if needed
+        })
     
     return jsonify(books)
 
