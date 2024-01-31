@@ -44,8 +44,12 @@ books = [
 @app.route('/books', methods=['GET'])
 def get_books():
     genre_query = request.args.get('genre', default=None, type=str)
+    author_query = request.args.get('author', default=None, type=str)
     if genre_query:
         filtered_books = [book for book in books if genre_query.lower() in book['genre'].lower()]
+        return jsonify(filtered_books)
+    if author_query:
+        filtered_books = [book for book in books if genre_query.lower() in book['author'].lower()]
         return jsonify(filtered_books)
     return jsonify(books)
 
