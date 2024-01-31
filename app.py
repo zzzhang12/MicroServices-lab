@@ -130,7 +130,7 @@ def get_books():
             'books': books  # You can modify this to return a specific set of other books if needed
         })
     
-    return jsonify(books)
+    return jsonify(filtered_books)
 
 if __name__ == '__main__':
     app.run(debug=True)
